@@ -18,7 +18,7 @@ namespace e_Tikets.Controllers
         public async Task<IActionResult> Index()
         {
             var allCiemas = await _context.Cienmes.ToListAsync();
-            return View();
+            return View(allCiemas);
         }
     }
 }

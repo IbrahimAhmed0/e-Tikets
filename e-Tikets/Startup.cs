@@ -1,4 +1,5 @@
 using e_Tikets.Data;
+using e_Tikets.Data.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,6 +28,10 @@ namespace e_Tikets
         {
             services.AddDbContext<AppDbContext>(options =>
                        options.UseSqlServer(Configuration.GetConnectionString("DefultConnection")));
+
+            //SerivceActor
+            services.AddScoped<IActorService, ActorService>();
+
             services.AddControllersWithViews();
         }
 

@@ -1,8 +1,9 @@
-﻿@model IEnumerable<Actor>
+﻿@model IEnumerable<Producer>
 
 @{
-    ViewData["Title"] = "List Of Actors";
+    ViewData["Title"] = "List Of Producers";
 }
+
 <style>
     tbody tr td{
         padding: 10px;
@@ -14,7 +15,7 @@
         <table>
             <thead>
                 <tr class="text-center">
-                    <th>@Html.DisplayNameFor(model=> model.profilePictureURL)</th>
+                    <th>@Html.DisplayNameFor(model=> model.ProfilePictureURL)</th>
                     <th>@Html.DisplayNameFor(model=> model.FullName)</th>
                     <th>@Html.DisplayNameFor(model=> model.Bio)</th>
                     <th>Actions</th>
@@ -23,9 +24,9 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr class="test">
-                        <td class="align-middle">
-                            <img class="rounded-circle" src="@item.profilePictureURL" style="max-width:100px" alt="@item.FullName"/>
+                    <tr class="text-center">
+                        <td  class="align-middle ">
+                            <img class="rounded-circle" src="@item.ProfilePictureURL" style="max-width:100px" alt="@item.FullName"/>
                         </td>
                         <td class="align-middle">
                             @Html.DisplayFor(modelItem=> item.FullName)
