@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using e_Tikets.Data.Base;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace e_Tikets.Models
 {
-    public class Actor
+    public class Actor : IEntityBase
     {
 
         [Key]

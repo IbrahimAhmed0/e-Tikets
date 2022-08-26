@@ -89,8 +89,5 @@ namespace e_Tikets.Controllers
             await _service.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
-
-
-
     }
 }

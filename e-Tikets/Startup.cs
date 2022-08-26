@@ -31,6 +31,7 @@ namespace e_Tikets
 
             //SerivceActor
             services.AddScoped<IActorService, ActorService>();
+            services.AddScoped<IProducerService, ProducerService>();
 
             services.AddControllersWithViews();
         }
