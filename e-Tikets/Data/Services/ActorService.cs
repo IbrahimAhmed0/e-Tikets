@@ -8,7 +8,9 @@ namespace e_Tikets.Data.Services
 {
     public class ActorService : EntityBaseReopostery<Actor> , IActorService
     {
-        private readonly AppDbContext _context;
-        public ActorService(AppDbContext context) : base(context) { }
+        //private readonly AppDbContext _context;
+        public ActorService(AppDbContext context) : base(context)
+        { 
+        }
     }
 }

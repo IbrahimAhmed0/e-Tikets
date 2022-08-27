@@ -1,4 +1,6 @@
 ﻿using e_Tikets.Data;
+using e_Tikets.Data.Services;
+using e_Tikets.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
@@ -7,17 +9,83 @@ namespace e_Tikets.Controllers
 {
     public class ProducersController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IProducerService _producerService;
 
-        public ProducersController(AppDbContext context)
+        public ProducersController(IProducerService producerService)
         {
-            _context = context;
+            _producerService = producerService;
         }
+
+
 
         public async Task<IActionResult> Index()
         {
-            var allProducers = await _context.Producers.ToListAsync();
-            return View(allProducers);
+            var allCiemas = await _producerService.GetAllasync();
+            return View(allCiemas);
+        }
+
+
+        //Get: Actors/ Edit
+        public async Task<IActionResult> Edit(int id)
+        {
+            var producerDetails = await _producerService.GetByIdAsync(id);
+            if (producerDetails == null) return View("Not Found");
+            return View(producerDetails);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id,
+            [Bind("Id", "FullName", "ProfilePictureURL", "Bio")] Producer newproducer)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(newproducer);
+            }
+            await _producerService.UpdateAsync(id, newproducer);
+            return RedirectToAction(nameof(Index));
+        }
+        //Get: Actors/ Deatila/ 1
+        public async Task<IActionResult> Details(int id)
+        {
+            var producerDetails = await _producerService.GetByIdAsync(id);
+            if (producerDetails == null) return View("Not Found");
+            return View(producerDetails);
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var producerDetails = await _producerService.GetByIdAsync(id);
+            if (producerDetails == null) return View("Not Found");
+            return View(producerDetails);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+
+            var producerDetails = await _producerService.GetByIdAsync(id);
+            if (producerDetails == null) View("Not Found");
+
+            await _producerService.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
+
+
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("Id", "FullName", "ProfilePictureURL", "Bio")] Producer producer)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(producer);
+            }
+            await _producerService.AddAsync(producer);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
