@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace e_Tikets.Data.Base
@@ -45,6 +48,14 @@ namespace e_Tikets.Data.Base
             EntityEntry entityEntry = _context.Entry<T>(entity);
             entityEntry.State = EntityState.Modified;
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<T>> GetAllasync(params Expression<Func<T, object>>[] includeProperties)
+        {
+            IQueryable<T> query = _context.Set<T>();
+            query = includeProperties.Aggregate(query, (current, includeProperty) =>
+            current.Include(includeProperty));
+            return await query.ToListAsync();
         }
     }
 }

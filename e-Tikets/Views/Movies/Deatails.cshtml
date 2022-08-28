@@ -1,46 +1,45 @@
-﻿@model IEnumerable<Movie>
+﻿@model Movie
 
 @{
-    ViewData["Title"] = "List Of Movies";
+    ViewData["Title"] = "Movie Deatils";
 }
 
 
 <div class="row">
-    @foreach (var item in Model)
-    {
-        <div class="col-md-4 col-xs-6 border-primary mb-3">
-            <div class="card mb-3" style="max-width: 450px">
+   
+        <div class="col-md-8 offset-2">
+            <div class="card mb-3">
                 <div class="row g-0">
                     <div class="col-md-12">
                         <div class="card-header text-white bg-info">
                             <p class="card-text">
                                 <h5 class="card-title">
-                                    @item.Name
-                                    <a class="text-white float-right"><i class="bi bi-pencil-square"></i></a>
+                                   @Model.Name
                                 </h5>
                             </p>
                         </div>
                     </div>
 
                     <div class="col-md-6">
-                        <img src="@item.ImageURL" width="100%" height="100%" alt="@item.Name" />
+                        <img src="@Model.ImageURL" width="100%" height="100%" alt="@Model.Name" />
                     </div>
 
                     <div class="col-md-6">
                         <div class="card-body">
-                            <p class="card-text">@item.Description</p>
-                            <p class="card-text"><b>Cinema: </b>@item.Cienme.Name</p>
-                            <p class="card-text"><b>Category: </b>@item.MovieCategory</p>
-                            <p class="card-text"><b>Start Date: </b>@item.StartDate.ToString("dd MMM yy")</p>
-                            <p class="card-text"><b>End Date: </b>@item.EndDate.ToString("dd MMM yy")</p>
+                            <p class="card-text">@Model.Description</p>
+                            <p class="card-text"><b>Cinema: </b>@Model.Cienme.Name</p>
+                            <p class="card-text"><b>Producer: </b>@Model.Producer.FullName</p>
+
+                            <p class="card-text"><b>Start Date: </b>@Model.StartDate.ToString("dd MMM yy")</p>
+                            <p class="card-text"><b>End Date: </b>@Model.EndDate.ToString("dd MMM yy")</p>
                             <p class="card-text">
                                 <b>States</b>
 
-                                @if (DateTime.Now >= item.StartDate && DateTime.Now <= item.EndDate)
+                                @if (DateTime.Now >= Model.StartDate && DateTime.Now <= Model.EndDate)
                                 {
                                     <span class="badge bg-success text-white">AVAILABLE</span>
                                 }
-                                else if (DateTime.Now > item.EndDate)
+                                else if (DateTime.Now > Model.EndDate)
                                 {
                                     <span class="badge bg-success text-white">EXPIRED</span>
                                 }
@@ -56,13 +55,13 @@
                     <div class="col-md-12">
                         <div class="card-footer">
                             <p class="card-text">
-                                <a class="btn btn-outline-primary float-right" asp-action="Deatails" asp-route-id="@item.Id">
+                                <a class="btn btn-outline-primary float-right" asp-action="index">
                                     <i class="bi bi-eye-fill"></i>
-                                   Show Details
+                                    return to Movies
                                 </a>
                                 <a class="btn btn-success text-white">
                                     <i cite="bi bi-cart-plus"></i>
-                                    Add to Cart(@item.Price.ToString("c"))
+                                    Add to Cart(@Model.Price.ToString("c"))
                                 </a>
                             </p>
                         </div>
@@ -71,5 +70,5 @@
                 </div>
             </div>
         </div>
-    }
+   
 </div>
