@@ -34,7 +34,7 @@ namespace e_Tikets.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Edit(int id, 
-            [Bind("Id", "Logo", "Name", "Description")] Cienme newCinema)
+            [Bind("Id", "Logo", "Name", "Description")] Cienma newCinema)
         {
             if (!ModelState.IsValid)
             {
@@ -77,7 +77,7 @@ namespace e_Tikets.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Id", "Logo", "Name", "Description")] Cienme cinema)
+        public async Task<IActionResult> Create([Bind("Id", "Logo", "Name", "Description")] Cienma cinema)
         {
             if (!ModelState.IsValid)
             {

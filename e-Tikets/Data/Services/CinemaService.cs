@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace e_Tikets.Data.Services
 {
-    public class CinemaService : EntityBaseReopostery<Cienme> , ICinemaService
+    public class CinemaService : EntityBaseReopostery<Cienma> , ICinemaService
     {
 
         //private readonly AppDbContext _appDbContext;

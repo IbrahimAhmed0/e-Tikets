@@ -30,7 +30,7 @@ namespace e_Tikets.Models
         //Ciema
         public int CinemaId { get; set; }
         [ForeignKey("CinemaId")]
-        public Cienme Cienme { get; set; }
+        public Cienma Cienme { get; set; }
 
         public int ProducerId { get; set; }
         [ForeignKey("ProducerId")]

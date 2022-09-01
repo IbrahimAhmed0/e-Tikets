@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace e_Tikets.Data.Services
 {
-    public interface ICinemaService : IEntityBaseRepositry<Cienme>
+    public interface ICinemaService : IEntityBaseRepositry<Cienma>
     {
     }
 }

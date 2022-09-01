@@ -22,36 +22,36 @@ namespace e_Tikets.Data
 
                 if (!context.Cienmes.Any())
                 {
-                    context.Cienmes.AddRange(new List<Cienme>()
+                    context.Cienmes.AddRange(new List<Cienma>()
                     {
-                        new Cienme()
+                        new Cienma()
                         {
                             Name = "Cinema 1",
                             Logo = "http://dotnethow.net/images/cinemas/cinema-1.jpeg",
                             Description = "This is the descriptino of the first cinema"
                         },
 
-                         new Cienme()
+                         new Cienma()
                          {
                              Name = "Cinema 2",
                              Logo = "http://dotnethow.net/images/cinemas/cinema-2.jpeg",
                              Description = "This is the descriptino of the second cinema"
                          },
 
-                          new Cienme()
+                          new Cienma()
                           {
                               Name = "Cinema 3",
                               Logo = "http://dotnethow.net/images/cinemas/cinema-3.jpeg",
                               Description = "This is the descriptino of the third cinema"
                           },
 
-                           new Cienme()
+                           new Cienma()
                           {
                               Name = "Cinema 4",
                               Logo = "http://dotnethow.net/images/cinemas/cinema-4.jpeg",
                               Description = "This is the descriptino of the four cinema"
                           },
-                          new Cienme()
+                          new Cienma()
                           {
                               Name = "Cinema 5",
                               Logo = "http://dotnethow.net/images/cinemas/cinema-5.jpeg",

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Cienme>
+﻿@model IEnumerable<Cienma>
 
 @{
     ViewData["Title"] = "List Of Cienmas";
@@ -52,3 +52,4 @@
         </table>
     </div>
 </div>
+     @await Html.PartialAsync("_CreteItem" , "Cinemas")

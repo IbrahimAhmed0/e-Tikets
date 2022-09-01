@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace e_Tikets.Models
 {
-    public class Cienme : IEntityBase
+    public class Cienma : IEntityBase
     {
 
         [Key]
