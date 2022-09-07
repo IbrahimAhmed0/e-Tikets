@@ -14,8 +14,5 @@ namespace e_Tikets.Data.Services
 
         Task AddNewMovieAsync(NewMovieVM data);
         Task UpdateMovieAsync(NewMovieVM data);
-
-
-
     }
 }

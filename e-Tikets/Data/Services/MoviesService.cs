@@ -69,9 +69,44 @@ namespace e_Tikets.Data.Services
             return response;
         }
 
-        public Task UpdateMovieAsync(NewMovieVM data)
+        public async Task UpdateMovieAsync(NewMovieVM data)
         {
-            throw new System.NotImplementedException();
+            var dbMovie = await _context.Movies.FirstOrDefaultAsync(n => n.Id == data.Id);
+
+            if(dbMovie != null)
+            {
+                dbMovie.Name = data.Name;
+                dbMovie.Description = data.Description;
+                dbMovie.Price = data.Price;
+                dbMovie.ImageURL = data.ImageURL;
+                dbMovie.CinemaId = data.CinemaId;
+                dbMovie.StartDate = data.StartDate;
+                dbMovie.EndDate = data.EndDate;
+                dbMovie.MovieCategory = data.MovieCategory;
+                dbMovie.ProducerId = data.ProducerId;
+                await _context.SaveChangesAsync();
+            }
+
+            //Remove esisting actors
+
+            var existingActorsDb = _context.Actor_Movies.Where(n => n.MovieId == data.Id).ToList();
+            _context.Actor_Movies.RemoveRange(existingActorsDb);
+            await _context.SaveChangesAsync();
+
+            // Add Movie Actors
+
+            foreach (var actorId in data.ActorIds)
+            {
+                var newActorMovie = new Actor_Movie()
+                {
+                    MovieId = data.Id,
+                    ActorId = actorId
+                };
+                await _context.SaveChangesAsync();
+            }
+
+            await _context.SaveChangesAsync();
+
         }
     }
 }
