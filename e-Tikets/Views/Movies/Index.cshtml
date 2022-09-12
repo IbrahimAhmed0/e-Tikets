@@ -60,7 +60,7 @@
                                     <i class="bi bi-eye-fill"></i>
                                    Show Details
                                 </a>
-                                <a class="btn btn-success text-white">
+                                <a  asp-controller="Orders" asp-action="AddItemToShoppingCart" asp-route-id="@item.Id" class="btn btn-success text-white">
                                     <i cite="bi bi-cart-plus"></i>
                                     Add to Cart(@item.Price.ToString("c"))
                                 </a>

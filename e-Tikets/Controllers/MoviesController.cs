@@ -32,7 +32,7 @@ namespace e_Tikets.Controllers
             if (!string.IsNullOrEmpty(searchString))
             {
 
-                var filterResult = allMovies.Where(n=> n.Name.ToLower().(searchString.ToLower())
+                var filterResult = allMovies.Where(n=> n.Name.ToLower().Contains(searchString.ToLower())
                 || n.Description.ToLower().Contains(searchString.ToLower()));
 
 
