@@ -1,5 +1,7 @@
 ﻿using e_Tikets.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace e_Tikets.Data.Services
@@ -14,9 +16,12 @@ namespace e_Tikets.Data.Services
             _context = context;
         }
 
-        public Task<List<Order>> GetOrdersByUserIdAndRoleAsync(string userId, string userRole)
+        public async Task<List<Order>> GetOrdersByUserIdAndRoleAsync(string userId)
         {
-            throw new System.NotImplementedException();
+            var orders = await _context.Orders.Include(n => n.OrderItems).ThenInclude(n => n.movie)
+                .Where(n => n.UserId == userId).ToListAsync();
+
+            return orders;
         }
 
         public async Task StoreOrderAsync(List<ShoppingCartItem> items, string userId, string userEmailAddress)
