@@ -1,10 +1,13 @@
 using e_Tikets.Data;
 using e_Tikets.Data.Cart;
 using e_Tikets.Data.Services;
+using e_Tikets.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,8 +44,14 @@ namespace e_Tikets
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
 
+            //Authentication and authorization
+            services.AddIdentity<ApplicatoinUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddMemoryCache();
             services.AddSession();
-       
+            services.AddAuthentication(optinos =>
+            {
+                optinos.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            });
 
             services.AddControllersWithViews();
         }
@@ -66,6 +75,10 @@ namespace e_Tikets
             app.UseRouting();
             app.UseSession();
 
+            //Auth & Authoziation
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -76,6 +89,7 @@ namespace e_Tikets
             });
 
             AppDbinitializer.Seed(app);
+            AppDbinitializer.SeedUsersAndRolesAsync(app).Wait();
         }
     }
 }

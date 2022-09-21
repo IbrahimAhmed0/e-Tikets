@@ -1,9 +1,10 @@
 ﻿using e_Tikets.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace e_Tikets.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<ApplicatoinUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
