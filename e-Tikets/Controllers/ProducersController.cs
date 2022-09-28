@@ -1,12 +1,15 @@
 ﻿using e_Tikets.Data;
 using e_Tikets.Data.Services;
+using e_Tikets.Data.Static;
 using e_Tikets.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 namespace e_Tikets.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class ProducersController : Controller
     {
         private readonly IProducerService _producerService;
@@ -17,7 +20,7 @@ namespace e_Tikets.Controllers
         }
 
 
-
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var allCiemas = await _producerService.GetAllasync();
@@ -44,7 +47,10 @@ namespace e_Tikets.Controllers
             await _producerService.UpdateAsync(id, newproducer);
             return RedirectToAction(nameof(Index));
         }
-        //Get: Actors/ Deatila/ 1
+
+
+        [AllowAnonymous]
+        //Get: Producers/ Deatila/ 1
         public async Task<IActionResult> Details(int id)
         {
             var producerDetails = await _producerService.GetByIdAsync(id);
